@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>诗词 · 千古风流（从诗经到新诗 · 逐字注音 · 水墨画意）</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div id="compatBanner" style="display:none"></div>
+<script>
+/* 兼容性自检（纯 ES5） */
+(function () {
+  var errs = [];
+  window.onerror = function (m, s, l) { errs.push(String(m) + ' @' + String(s || '').split('/').pop() + ':' + l); return false; };
+  function show() {
+    var el = document.getElementById('compatBanner');
+    if (!el) return;
+    var msg = '';
+    if (typeof PoemUI === 'undefined') {
+      msg = '交互组件 assets/poemui.js 未能加载：请确认 assets 文件夹与页面文件在同一目录，并从 index.html 进入。';
+    } else if (errs.length) {
+      msg = '页面脚本报错：' + errs.slice(0, 2).join('；');
+    }
+    if (msg) {
+      el.style.cssText = 'display:block;position:fixed;left:0;right:0;bottom:0;z-index:9999;background:#d03b3b;color:#fff;padding:10px 18px;font-size:14px;line-height:1.7';
+      el.innerHTML = '⚠ 本页交互内容无法运行 —— ' + msg + ' 若仍异常，请改用 Chrome 或新版 Edge 浏览器打开本页。';
+    }
+  }
+  if (document.readyState === 'complete') { show(); } else if (window.addEventListener) { window.addEventListener('load', show); }
+})();
+</script>
+
+<nav class="topbar">
+  <div class="brand" id="homebtn"><span class="seal">诗</span>千古风流</div>
+  <div class="searchwrap">
+    <input type="text" id="searchbox" placeholder="搜索诗词片段、诗人、篇名，或输入拼音（如 chunmian bujue xiao）…" autocomplete="off">
+    <span class="hint">模糊匹配</span>
+  </div>
+  <button class="tbtn" id="randombtn">🎲 随机一首</button>
+</nav>
+
+<div class="hero" id="hero">
+  <h1>千古风流</h1>
+  <div class="sub">从诗经楚辞到唐宋诗词，再到当代新诗 —— 每字注音，每句成解，每篇入画</div>
+  <div class="rule"></div>
+  <div class="stats" id="stats"></div>
+</div>
+
+<div class="filterbar" id="filterbar"></div>
+
+<div class="listwrap" id="listwrap">
+  <div class="listmeta" id="listmeta"></div>
+  <div class="cards" id="cards"></div>
+</div>
+
+<div class="detail" id="detail" style="display:none"></div>
+
+<!-- 数据（按朝代批次） -->
+<script src="data/db-01-xianqinhan.js"></script>
+<script src="data/db-02-weijin.js"></script>
+<script src="data/db-03-shengtang.js"></script>
+<script src="data/db-04-lidu.js"></script>
+<script src="data/db-05-zhongwantang.js"></script>
+<script src="data/db-06-beisong.js"></script>
+<script src="data/db-07-nansong.js"></script>
+<script src="data/db-08-jinyuanmingqing.js"></script>
+<script src="data/db-09-jindai.js"></script>
+<script src="data/db-10-tangbu.js"></script>
+<script src="data/db-11-lidubu.js"></script>
+<script src="data/db-12-songbu.js"></script>
+<script src="data/db-13-wanbu.js"></script>
+<script src="data/db-14-xianqinbu.js"></script>
+<script src="data/db-15-baijuyi.js"></script>
+<script src="data/db-16-tangwudai.js"></script>
+<script src="data/db-17-songbu2.js"></script>
+<script src="data/db-18-xiandai.js"></script>
+<script src="data/db-19-mingpian.js"></script>
+<script src="data/db-20-guwen.js"></script>
+<script src="data/db-21-guwen2.js"></script>
+<script src="assets/inkpaint.js"></script>
+<script src="assets/poemui.js"></script>
+</body>
+</html>

@@ -37,7 +37,7 @@ index.html            单页应用
 assets/poemui.js      筛选/搜索/详情/路由逻辑（ES5）
 assets/style.css      宣纸水墨风样式
 data/db-01…21.js     诗词数据库（21 个批次，含古文赋体，window.POEM_DB）
-images/               AI 插画（gen/ 流水线生成，按「朝代-作者-篇名」命名，不入库）
+images/               AI 插画（gen/ 流水线生成，按「朝代-作者-篇名」命名，随仓库发布供 Pages 使用）
 data/SCHEMA.md        数据格式与拼音标注规范
 data/_check.js        质检：字数=拼音词数、意象/朝代白名单、高风险多音字扫描（本地保留，不入库）
 _test.js              全站交互测试（Playwright，332 项断言）

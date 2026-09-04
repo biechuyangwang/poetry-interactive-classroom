@@ -19,7 +19,7 @@ window.POEM_DB.push(
     { text: "间关莺语花底滑，幽咽泉流冰下难", py: "jiān guān yīng yǔ huā dǐ huá yōu yè quán liú bīng xià nán", note: "婉转如黄莺在花下啼鸣流滑，低咽如泉水在冰下艰难流动——乐音的欢畅与滞涩两个方向。" },
     { text: "冰泉冷涩弦凝绝，凝绝不通声暂歇", py: "bīng quán lěng sè xián níng jué níng jué bù tōng shēng zàn xiē", note: "如冰泉冷涩，弦声渐渐凝滞；凝滞不通，乐声暂时停歇——由动入静的悬停。" },
     { text: "别有幽愁暗恨生，此时无声胜有声", py: "bié yǒu yōu chóu àn hèn shēng cǐ shí wú shēng shèng yǒu shēng", note: "另有幽愁暗恨渐渐升起，此时无声胜过有声——静默成为音乐的一部分，至论。" },
-    { text: "银瓶乍破水浆迸，铁骑突出刀枪鸣", py: "yín píng zhà pò shuǐ jiāng bèng tiě jí tū chū dāo qiāng míng", note: "忽然如银瓶迸裂水浆四溅，又如铁骑杀出刀枪齐鸣——静默后的爆发，惊心动魄。" },
+    { text: "银瓶乍破水浆迸，铁骑突出刀枪鸣", py: "yín píng zhà pò shuǐ jiāng bèng tiě jì tū chū dāo qiāng míng", note: "忽然如银瓶迸裂水浆四溅，又如铁骑杀出刀枪齐鸣——静默后的爆发，惊心动魄。" },
     { text: "曲终收拨当心画，四弦一声如裂帛", py: "qǔ zhōng shōu bō dāng xīn huà sì xián yī shēng rú liè bó", note: "曲终时拨子向琵琶中心一划，四弦齐响如撕裂绢帛——收束的干脆决绝。" },
     { text: "东船西舫悄无言，唯见江心秋月白", py: "dōng chuán xī fǎng qiǎo wú yán wéi jiàn jiāng xīn qiū yuè bái", note: "东西船只静悄无言，只见江心一片秋月洁白——以景结乐，余音全交给月光。" },
     { text: "凄凄不似向前声，满座重闻皆掩泣", py: "qī qī bù sì xiàng qián shēng mǎn zuò chóng wén jiē yǎn qì", note: "凄凄切切已不像先前的乐声，满座的人重听都掩面而泣——乐随人心转悲。" },

@@ -1,6 +1,6 @@
 /* ============================================================
    poemui.js —— 诗词专题站前端逻辑（纯 ES5，无依赖）
-   依赖：index.html 中先加载数据文件（window.POEM_DB）与 inkpaint.js
+   依赖：index.html 中先加载数据文件（window.POEM_DB）；插画读取 images/<朝代-作者-篇名>.png（gen/ 批量生成），缺图为占位符
    ============================================================ */
 (function () {
   'use strict';
@@ -76,12 +76,11 @@
       }
       var artA = p.art || [];
       for (j = 0; j < artA.length; j++) if (ART_KEYS.indexOf(artA[j]) >= 0 && np.art.indexOf(artA[j]) < 0) np.art.push(artA[j]);
-      /* 预构建检索串 */
-      var txt = np.title + ' ' + np.author + ' ', pyt = '';
-      for (j = 0; j < np.lines.length; j++) { txt += np.lines[j].text + ' '; pyt += np.lines[j].py + ' '; }
-      np._nt = normText(txt);
-      np._np = stripAcc(pyt).replace(/[^a-z0-9]/g, '');
+      /* 预构建检索串：篇名、作者、每句各自独立，精确子串只在字段内匹配 */
+      np._fld = [normText(np.title), normText(np.author)];
       np._lns = np.lines.map(function (L2) { return normText(L2.text); });
+      for (j = 0; j < np._lns.length; j++) np._fld.push(np._lns[j]);
+      np._pys = np.lines.map(function (L2) { return stripAcc(L2.py).replace(/[^a-z0-9]/g, ''); });
       /* 意象默认 */
       if (!np.art.length) np.art = ['mountain', 'water', 'tree'];
       DB.push(np);
@@ -95,7 +94,7 @@
   }
 
   /* ---------- 状态 ---------- */
-  var ST = { dyn: {}, poet: {}, th: {}, form: {}, q: '', view: 'list', cur: null, inkSeed: 0, inkCount: 0, tint: false };
+  var ST = { dyn: {}, poet: {}, th: {}, form: {}, q: '', view: 'list', cur: null };
   function anySel() {
     var k;
     for (k in ST.dyn) if (ST.dyn[k]) return true;
@@ -119,9 +118,12 @@
     if (!qRaw) return true;
     var q = normText(qRaw);
     if (!q) return true;
-    if (p._nt.indexOf(q) >= 0) return true;
+    var i;
+    for (i = 0; i < p._fld.length; i++) { if (p._fld[i].indexOf(q) >= 0) return true; }
     var qp = stripAcc(qRaw).replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
-    if (qp.length >= 2 && p._np.indexOf(qp) >= 0) return true;
+    if (qp.length >= 2) {
+      for (i = 0; i < p._pys.length; i++) { if (p._pys[i].indexOf(qp) >= 0) return true; }
+    }
     if (q.length >= 2 && q.length <= 8) { /* 模糊跳字：仅限单句或标题内保序匹配，不跨句 */
       var j;
       if (subseqIn(normText(p.title + p.author), q)) return true;
@@ -354,6 +356,25 @@
       '<span class="dot">·</span>' + esc(p.form) + '</div>';
     det.appendChild(head);
 
+    /* AI 插画置于诗前：先观画，再品诗。images/<朝代-作者-篇名>.png（gen/ 批量生成），
+       文件名规则与 gen/batch.js safeName 一致，缺图显示占位符 */
+    var art = el('div', 'artcard');
+    art.innerHTML = '<h3>AI 插画</h3>';
+    var stage = el('div', 'artstage');
+    var ph = el('div', 'placeholder', '<span class="phseal">画</span>AI 插画绘制中<br>成图后此处自动呈现');
+    stage.appendChild(ph);
+    var img = document.createElement('img');
+    img.className = 'artimg';
+    img.alt = p.title + ' 插画';
+    img.style.display = 'none';
+    img.onload = function () { ph.style.display = 'none'; img.style.display = 'block'; };
+    img.onerror = function () { img.style.display = 'none'; ph.style.display = ''; };
+    img.src = 'images/' + encodeURIComponent(String(p.id).replace(/[\\/:*?"<>|]/g, '_')) + '.png';
+    stage.appendChild(img);
+    art.appendChild(stage);
+    art.appendChild(el('div', 'arttools', '<span class="lbl">意象：' + p.art.map(function (a) { return ART_CN[a] || a; }).join(' · ') + '</span>'));
+    det.appendChild(art);
+
     var vs = el('div', 'verses');
     var spMap = {}, j;
     for (j = 0; j < p.special.length; j++) spMap[p.special[j].ch] = p.special[j];
@@ -411,49 +432,6 @@
     if (p.analysis) det.appendChild(el('div', 'dcard', '<h3>意境赏析</h3><p>' + esc(p.analysis) + '</p>'));
     if (p.background) det.appendChild(el('div', 'dcard', '<h3>创作背景</h3><p>' + esc(p.background) + '</p>'));
 
-    /* 水墨画 */
-    var ink = el('div', 'inkcard');
-    ink.innerHTML = '<h3>水墨画意</h3>';
-    var stage = el('div', 'inkstage');
-    stage.appendChild(el('div', 'placeholder', '依「' + esc(p.art.map(function (a) { return ART_CN[a] || a; }).join(' · ')) + '」意象生成'));
-    var cv = document.createElement('canvas');
-    stage.appendChild(cv);
-    ink.appendChild(stage);
-    var tl = el('div', 'inktools');
-    var gen = el('button', 'dbtn zhu', '🖌 生成水墨画');
-    var regen = el('button', 'dbtn', '换个画意');
-    var dl = el('button', 'dbtn', '⤓ 下载 PNG');
-    var tintBtn = el('button', 'dbtn', '浅绛设色：关');
-    regen.style.display = 'none'; dl.style.display = 'none';
-    function doPaint(newSeed) {
-      if (newSeed || !ST.inkSeed) { ST.inkCount++; ST.inkSeed = (window.InkPaint ? InkPaint.hashStr(p.id + '#' + ST.inkCount) : 1) % 100000; }
-      stage.querySelector('.placeholder') && (stage.querySelector('.placeholder').style.display = 'none');
-      cv.style.display = '';
-      InkPaint.paint(cv, {
-        seed: ST.inkSeed, art: p.art, night: p.art.indexOf('night') >= 0,
-        title: p.title, author: p.author, tint: ST.tint
-      });
-      gen.innerHTML = '🖌 重新绘制';
-      regen.style.display = ''; dl.style.display = '';
-    }
-    gen.onclick = function () { doPaint(false); };
-    regen.onclick = function () { doPaint(true); };
-    dl.onclick = function () {
-      var a = document.createElement('a');
-      a.download = p.title.replace(/[\\/:*?"<>|]/g, '') + '-水墨画意.png';
-      a.href = cv.toDataURL('image/png');
-      a.click();
-    };
-    tintBtn.onclick = function () {
-      ST.tint = !ST.tint;
-      tintBtn.innerHTML = '浅绛设色：' + (ST.tint ? '开' : '关');
-      tintBtn.className = 'dbtn' + (ST.tint ? ' on' : '');
-      if (ST.inkSeed) doPaint(false);
-    };
-    tl.appendChild(gen); tl.appendChild(regen); tl.appendChild(dl); tl.appendChild(tintBtn);
-    tl.appendChild(el('span', 'lbl', '意象：' + p.art.map(function (a) { return ART_CN[a] || a; }).join(' · ')));
-    ink.appendChild(tl);
-    det.appendChild(ink);
     window.scrollTo(0, 0);
   }
   function currentListOrAll() {
@@ -490,7 +468,7 @@
     var poets = {}, i;
     for (i = 0; i < DB.length; i++) poets[DB[i].author] = 1;
     s.innerHTML = '收录 <b>' + DB.length + '</b> 首 · <b>' + Object.keys(poets).length + '</b> 位诗人 · ' +
-      '自诗经楚辞至当代新诗 · 逐字注音 · 逐句解析 · 水墨画意';
+      '自诗经楚辞至当代新诗 · 逐字注音 · 逐句解析 · AI 插画';
   }
   function route() {
     var h = location.hash.replace(/^#/, '');

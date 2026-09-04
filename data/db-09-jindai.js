@@ -273,7 +273,7 @@ window.POEM_DB.push(
     { text: "丁香一样的颜色", py: "dīng xiāng yī yàng de yán sè", note: "丁香一样的颜色——视觉的淡紫。" },
     { text: "丁香一样的芬芳", py: "dīng xiāng yī yàng de fēn fāng", note: "丁香一样的芬芳——嗅觉的清幽。" },
     { text: "丁香一样的忧愁", py: "dīng xiāng yī yàng de yōu chóu", note: "丁香一样的忧愁——通感收束，愁也有了香气。" },
-    { text: "在雨中哀怨，哀怨又彷徨", py: "zài yǔ zhāng āi yuàn āi yuàn yòu páng huáng", note: "在雨中哀怨，哀怨又彷徨——顶针与复沓，回环如雨声。" },
+    { text: "在雨中哀怨，哀怨又彷徨", py: "zài yǔ zhōng āi yuàn āi yuàn yòu páng huáng", note: "在雨中哀怨，哀怨又彷徨——顶针与复沓，回环如雨声。" },
     { text: "她彷徨在这寂寥的雨巷", py: "tā páng huáng zài zhè jì liáo de yǔ xiàng", note: "她彷徨在这寂寥的雨巷——姑娘与我同在一条巷，同样彷徨。" },
     { text: "撑着油纸伞", py: "chēng zhe yóu zhǐ sǎn", note: "撑着油纸伞——与「我」的行头重合，人影渐近。" },
     { text: "像我一样", py: "xiàng wǒ yī yàng", note: "像我一样——原来她是我的镜像。" },

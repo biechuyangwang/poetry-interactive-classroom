@@ -21,7 +21,7 @@ window.POEM_DB.push(
     { text: "朔气传金柝，寒光照铁衣", py: "shuò qì chuán jīn tuò hán guāng zhào tiě yī", note: "北方的寒气传送着打更声，清冷的月光映照着将士铠甲——边塞夜宿的苦寒，对仗精工。" },
     { text: "将军百战死，壮士十年归", py: "jiāng jūn bǎi zhàn sǐ zhuàng shì shí nián guī", note: "将军身经百战死，壮士转战十年归——互文见义：战争惨烈与生还之幸尽在十字。" },
     { text: "归来见天子，天子坐明堂", py: "guī lái jiàn tiān zǐ tiān zǐ zuò míng táng", note: "归来朝见天子，天子坐在殿堂上——由战场转入宫廷，命运的高光时刻。" },
-    { text: "策勋十二转，赏赐百千强", py: "cè xūn shí èr zhuǎn shǎng cì bǎi qiān qiáng", note: "记功 many 次，赏赐千百以上——极言功劳之高、赏赐之厚。" },
+    { text: "策勋十二转，赏赐百千强", py: "cè xūn shí èr zhuǎn shǎng cì bǎi qiān qiáng", note: "记功升了极多级，赏赐千百以上——极言功劳之高、赏赐之厚。" },
     { text: "可汗问所欲，木兰不用尚书郎，愿驰千里足，送儿还故乡", py: "kè hán wèn suǒ yù mù lán bù yòng shàng shū láng yuàn chí qiān lǐ zú sòng ér huán gù xiāng", note: "天子问她要什么，木兰不要做官，只愿骑上快马回故乡——辞官归里，人物境界全出。" },
     { text: "爷娘闻女来，出郭相扶将；阿姊闻妹来，当户理红妆；小弟闻姊来，磨刀霍霍向猪羊", py: "yé niáng wén nǚ lái chū guō xiāng fú jiāng ā zǐ wén mèi lái dàng hù lǐ hóng zhuāng xiǎo dì wén zǐ lái mó dāo huò huò xiàng zhū yáng", note: "父母互相搀扶出城迎接，姐姐打扮准备相迎，弟弟磨刀杀猪宰羊——一家人的欢跃各具情态，排比铺陈。" },
     { text: "开我东阁门，坐我西阁床，脱我战时袍，著我旧时裳", py: "kāi wǒ dōng gé mén zuò wǒ xī gé chuáng tuō wǒ zhàn shí páo zhuó wǒ jiù shí cháng", note: "开我的房门坐我的床，脱下战袍换上旧衣裳——四个「我」字，归来的自在与身份的还原。" },

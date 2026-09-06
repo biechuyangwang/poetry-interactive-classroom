@@ -248,7 +248,7 @@ window.POEM_DB.push(
   },
   {
     "title": "上邪",
-    "author": "佚名",
+    "author": "汉乐府",
     "dynasty": "汉",
     "form": "乐府",
     "themes": ["爱情闺怨"],
@@ -274,7 +274,7 @@ window.POEM_DB.push(
   },
   {
     "title": "江南",
-    "author": "佚名",
+    "author": "汉乐府",
     "dynasty": "汉",
     "form": "乐府",
     "themes": ["节令风物", "山水田园"],
@@ -296,7 +296,7 @@ window.POEM_DB.push(
   },
   {
     "title": "长歌行",
-    "author": "佚名",
+    "author": "汉乐府",
     "dynasty": "汉",
     "form": "乐府",
     "themes": ["哲理禅意", "人生感怀"],
@@ -324,7 +324,7 @@ window.POEM_DB.push(
   },
   {
     "title": "十五从军征",
-    "author": "佚名",
+    "author": "汉乐府",
     "dynasty": "汉",
     "form": "乐府",
     "themes": ["民生疾苦", "思乡怀人"],

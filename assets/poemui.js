@@ -148,6 +148,7 @@
   function formKey(f) {
     f = f || '';
     if (f.indexOf('散曲') === 0) return '散曲';
+    if (f.charAt(0) === '曲') return '戏曲';
     if (f.charAt(0) === '词') return '词';
     if (f.charAt(0) === '文') return '古文';
     if (f.charAt(0) === '赋') return '赋';
@@ -257,7 +258,7 @@
     var poetNames = Object.keys(poetCount).sort(function (a, b) { return poetCount[b] - poetCount[a]; });
     box.appendChild(group('诗人', poetCount, poetNames, ST.poet, 'poetscroll'));
     box.appendChild(group('主题', thCount, THEMES_ALL, ST.th));
-    var formOrder = ['四言诗', '楚辞', '乐府', '五言绝句', '七言绝句', '五言律诗', '七言律诗', '古体诗', '古文', '赋', '词', '散曲', '现代诗', '其他'];
+    var formOrder = ['四言诗', '楚辞', '乐府', '五言绝句', '七言绝句', '五言律诗', '七言律诗', '古体诗', '古文', '赋', '词', '散曲', '戏曲', '现代诗', '其他'];
     box.appendChild(group('体裁', formCount, formOrder, ST.form));
   }
 

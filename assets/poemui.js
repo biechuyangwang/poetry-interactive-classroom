@@ -1,6 +1,6 @@
 /* ============================================================
    poemui.js —— 诗词专题站前端逻辑（纯 ES5，无依赖）
-   依赖：index.html 中先加载数据文件（window.POEM_DB）；插画读取 images/<朝代-作者-篇名>.png（gen/ 批量生成），缺图为占位符
+   依赖：index.html 中先加载数据文件（window.POEM_DB）；插画读取 images/<朝代-作者-篇名>.webp（gen/ 批量生成），缺图为占位符
    ============================================================ */
 (function () {
   'use strict';
@@ -357,7 +357,7 @@
       '<span class="dot">·</span>' + esc(p.form) + '</div>';
     det.appendChild(head);
 
-    /* AI 插画置于诗前：先观画，再品诗。images/<朝代-作者-篇名>.png（gen/ 批量生成），
+    /* AI 插画置于诗前：先观画，再品诗。images/<朝代-作者-篇名>.webp（gen/ 批量生成），
        文件名规则与 gen/batch.js safeName 一致，缺图显示占位符 */
     var art = el('div', 'artcard');
     art.innerHTML = '<h3>AI 插画</h3>';
@@ -370,7 +370,7 @@
     img.style.display = 'none';
     img.onload = function () { ph.style.display = 'none'; img.style.display = 'block'; };
     img.onerror = function () { img.style.display = 'none'; ph.style.display = ''; };
-    img.src = 'images/' + encodeURIComponent(String(p.id).replace(/[\\/:*?"<>|]/g, '_')) + '.png';
+    img.src = 'images/' + encodeURIComponent(String(p.id).replace(/[\\/:*?"<>|]/g, '_')) + '.webp';
     stage.appendChild(img);
     art.appendChild(stage);
     art.appendChild(el('div', 'arttools', '<span class="lbl">意象：' + p.art.map(function (a) { return ART_CN[a] || a; }).join(' · ') + '</span>'));
